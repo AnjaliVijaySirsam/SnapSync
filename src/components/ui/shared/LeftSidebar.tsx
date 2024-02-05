@@ -8,6 +8,8 @@ import { INavLink } from "@/types";
 const LeftSidebar = () => {
   const { mutate: signOut, isSuccess } = useSignOutAccount();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const { user } = useUserContext();
   useEffect(() => {
     if (isSuccess) {
@@ -39,10 +41,15 @@ const LeftSidebar = () => {
         </Link>
         <ul className="flex flex-col gap-6">
           {sidebarLinks.map((link: INavLink) => {
-            // const isActive = pathname === link.route;
+            const isActive = pathname === link.route;
 
             return (
-              <li key={link.label} className="leftsidebar-link ">
+              <li
+                key={link.label}
+                className={`leftsidebar-link group ${
+                  isActive && "bg-primary-500"
+                }`}
+              >
                 <NavLink
                   to={link.route}
                   className="flex gap-4 items-center p-4"
@@ -50,7 +57,9 @@ const LeftSidebar = () => {
                   <img
                     src={link.imgURL}
                     alt={link.label}
-                    className="group-hover:invert-white "
+                    className={`group-hover:invert-white ${
+                      isActive && "invert-white"
+                    }`}
                   />
                   {link.label}
                 </NavLink>
@@ -59,6 +68,14 @@ const LeftSidebar = () => {
           })}
         </ul>
       </div>
+      <Button
+        variant="ghost"
+        className="shad-button_ghost"
+        onClick={() => signOut()}
+      >
+        <img src="/assets/icons/logout.svg" alt="logout" />
+        <p className="small-medium lg:base-medium">Logout</p>
+      </Button>
     </nav>
   );
 };

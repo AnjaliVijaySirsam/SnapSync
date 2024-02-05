@@ -27,9 +27,9 @@ import { title } from "process";
 const Signup = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
+  const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
     useCreateUserAccount();
-  const { mutateAsync: signInAccount, isLoading: isSigningIn } =
+  const { mutateAsync: signInAccount, isPending: isSigningIn } =
     useSignInAccount();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
@@ -65,7 +65,7 @@ const Signup = () => {
       form.reset();
       navigate("/");
     } else {
-      return toast({ title: "Loggin Failed...Please try again." });
+      return toast({ title: "Log in Failed...Please try again." });
     }
   }
   return (
@@ -137,7 +137,7 @@ const Signup = () => {
             )}
           />
           <Button className="shad-button_primary" type="submit">
-            {isCreatingUser ? (
+            {isCreatingAccount ? (
               <div className="flex-center gap-2">
                 <Loader />
                 Loading...

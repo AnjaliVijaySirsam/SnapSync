@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,14 +18,12 @@ import { Loader } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
-import { title } from "process";
 
 const Signin = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  // const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
-  //   useCreateUserAccount();
-  const { mutateAsync: signInAccount, isLoading } = useSignInAccount();
+
+  const { mutateAsync: signInAccount } = useSignInAccount();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
   //1. Define Your form
@@ -106,7 +103,7 @@ const Signin = () => {
                 Loading...
               </div>
             ) : (
-              "Sign in"
+              "Log in"
             )}
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">
