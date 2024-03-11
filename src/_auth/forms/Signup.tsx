@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,7 +22,6 @@ import {
   useSignInAccount,
 } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
-import { title } from "process";
 
 const Signup = () => {
   const { toast } = useToast();
@@ -139,7 +137,7 @@ const Signup = () => {
             )}
           />
           <Button className="shad-button_primary" type="submit">
-            {isCreatingAccount ? (
+            {isCreatingAccount || isSigningIn || isUserLoading ? (
               <div className="flex-center gap-2">
                 <Loader />
                 Loading...
