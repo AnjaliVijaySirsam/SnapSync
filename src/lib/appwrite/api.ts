@@ -225,7 +225,7 @@ export async function searchPosts(searchTerm: string) {
 }
 
 export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
-  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(9)];
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(10)];
 
   if (pageParam) {
     queries.push(Query.cursorAfter(pageParam.toString()));
@@ -311,7 +311,8 @@ export async function updatePost(post: IUpdatePost) {
     if (!updatedPost) {
       // Delete new file that has been recently uploaded
       if (hasFileToUpdate) {
-        await deleteFile(image.imageId);
+        // await deleteFile(image.imageId);
+        await deleteFile(post.imageId);
       }
 
       // If no new file uploaded, just throw error

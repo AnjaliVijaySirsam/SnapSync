@@ -1,3 +1,4 @@
+// import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -47,6 +48,7 @@ const Signup = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof SignupValidation>) {
     const newUser = await createUserAccount(values);
+    console.log(newUser);
     if (!newUser) {
       return toast({ title: "Sign Up failed...Please try again" });
     }
